@@ -10,12 +10,17 @@ function ToDoList(){
     }
     function addTask(){
         if(newTask.trim() !== ""){
-            setTasks(t => [...t, newTask]);
+            setTasks(t => [...t, {text: newTask, completed: false}]);
             setNewTask("");
         }
     }
     function deleteTask(index){
         const updatedTasks = tasks.filter((_, i) => i !== index);
+        setTasks(updatedTasks);
+    }
+    function toggleComplete(index){
+        const updatedTasks = [...tasks];
+        updatedTasks[index].completed = !updatedTasks[index].completed;
         setTasks(updatedTasks);
     }
     function moveTaskUp(index){
@@ -45,18 +50,21 @@ function ToDoList(){
                         onChange={handleInputChange}/>
                 <button className="add-button" onClick={addTask}>
                 Add Task
-                </button> <br /><br />
-
-                <ol>
-                    {tasks.map((task, index) => 
-                    <li key={index}>
-                        <span className="text">{task}</span>
-                        <button className="delete-button" onClick={() => deleteTask(index)}>❌</button>
-                        <button className="move-button" onClick={() => moveTaskUp(index)}>🔼</button>
-                        <button className="move-button" onClick={() =>   moveTaskDown(index)}>🔽</button>
-                    </li>)}
-                </ol>
+                </button>
             </div>
+            <ol>
+                {tasks.map((task, index) => 
+                <li key={index}>
+                    <span 
+                        className={`text ${task.completed ? "completed" : ""}`}
+                        onClick={() => toggleComplete(index)}>
+                        {task.text}
+                        </span>
+                    <button className="delete-button" onClick={() => deleteTask(index)}>❌</button>
+                    <button className="move-button" onClick={() => moveTaskUp(index)}>🔼</button>
+                    <button className="move-button" onClick={() =>   moveTaskDown(index)}>🔽</button>
+                </li>)}
+            </ol>
         </div>
     );
 }
