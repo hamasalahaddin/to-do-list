@@ -1,4 +1,7 @@
 <?php
+header("Access-Control-Allow-Origin: http://localhost:5173");
+header("Content-Type: application/json");
+
 require "db.php";
 
 $sql = "SELECT * FROM tasks";
@@ -10,5 +13,4 @@ while($row = mysqli_fetch_assoc($result)){
     $tasks[] = $row;
 }
 
-header("Content-Type: application/json");
 echo json_encode($tasks);
