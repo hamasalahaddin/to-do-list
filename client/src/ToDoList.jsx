@@ -34,8 +34,8 @@ function ToDoList(){
             }
         );
 
-        const message = await response.text();
-        console.log(message);
+        const data = await response.json();
+        console.log(data);
 
         setNewTask("");
 
@@ -52,7 +52,8 @@ function ToDoList(){
             }
         );
 
-        console.log(await response.text());
+        const data = await response.json();
+        console.log(data);
 
         await loadTasks();
     }
@@ -68,7 +69,8 @@ function ToDoList(){
             }
         );
 
-        console.log(await response.text());
+        const data = await response.json();
+        console.log(data);
 
         await loadTasks();
     }

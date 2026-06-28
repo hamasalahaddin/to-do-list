@@ -1,14 +1,30 @@
 <?php
 header("Access-Control-Allow-Origin: http://localhost:5173");
+header("Content-Type: application/json");
 
 require "db.php";
 
 $id = $_POST["id"];
 
-$sql = "DELETE FROM tasks WHERE id = $id";
+$stmt = mysqli_prepare(
+    $conn,
+    "DELETE FROM tasks WHERE id = ?"
+);
 
-if(mysqli_query($conn, $sql)){
-    echo "Task deleted successfully";
+mysqli_stmt_bind_param(
+    $stmt,
+    "i",
+    $id
+);
+
+if(mysqli_stmt_execute($stmt)){
+    echo json_encode([
+        "success" => true,
+        "message" => "Task deleted successfully"
+    ]);
 }else{
-    echo "Error";
+    echo json_encode([
+        "success" => false,
+        "message" => "Failed to delete task"
+    ]);
 }
