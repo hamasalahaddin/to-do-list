@@ -21,7 +21,7 @@ function ToDoList(){
     }
     async function addTask(){
         if(newTask.trim() === ""){
-            return;
+            hreturn;
         }
 
         const formData = new FormData();
@@ -41,14 +41,36 @@ function ToDoList(){
 
         await loadTasks();
     }
-    function deleteTask(index){
-        const updatedTasks = tasks.filter((_, i) => i !== index);
-        setTasks(updatedTasks);
+    async function deleteTask(id){
+        const formData = new FormData();
+        formData.append("id", id);
+
+        const response = await fetch("http://localhost/to-do-list/server/deleteTask.php",
+            {
+                method: "POST",
+                body: formData
+            }
+        );
+
+        console.log(await response.text());
+
+        await loadTasks();
     }
-    function toggleComplete(index){
-        const updatedTasks = [...tasks];
-        updatedTasks[index].completed = !updatedTasks[index].completed;
-        setTasks(updatedTasks);
+    async function toggleComplete(id, completed){
+        const formData = new FormData();
+        formData.append("id", id);
+        formData.append("completed", completed ? 0 : 1);
+
+        const response = await fetch("http://localhost/to-do-list/server/toggleComplete.php",
+            {
+                method: "POST",
+                body: formData
+            }
+        );
+
+        console.log(await response.text());
+
+        await loadTasks();
     }
     function moveTaskUp(index){
         if(index > 0){
@@ -83,11 +105,11 @@ function ToDoList(){
                 {tasks.map((task, index) => 
                 <li key={index}>
                     <span 
-                        className={`text ${task.completed ? "completed" : ""}`}
-                        onClick={() => toggleComplete(index)}>
+                        className={`text ${Number(task.completed) === 1 ? "completed" : ""}`}
+                        onClick={() => toggleComplete(task.id, Number(task.completed))}>
                         {task.task}
                     </span>
-                    <button className="delete-button" onClick={() => deleteTask(index)}>❌</button>
+                    <button className="delete-button" onClick={() => deleteTask(task.id)}>❌</button>
                     <button className="move-button" onClick={() => moveTaskUp(index)}>🔼</button>
                     <button className="move-button" onClick={() =>   moveTaskDown(index)}>🔽</button>
                 </li>)}
