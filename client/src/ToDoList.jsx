@@ -11,7 +11,7 @@ function ToDoList(){
         const data = await response.json();
         console.log(data);
 
-        setTasks(data);
+        setTasks(data.data);
     }
     useEffect(() => {
         loadTasks();

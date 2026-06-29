@@ -10,4 +10,4 @@ while($row = mysqli_fetch_assoc($result)){
     $tasks[] = $row;
 }
 
-echo json_encode($tasks);
+sendResponse(true, "Tasks loaded successfully", $tasks);
