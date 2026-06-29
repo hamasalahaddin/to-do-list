@@ -19,13 +19,7 @@ mysqli_stmt_bind_param(
 );
 
 if(mysqli_stmt_execute($stmt)){
-    echo json_encode([
-        "success" => true,
-        "message" => "Task added successfully"
-    ]);
-}else{
-    echo json_encode([
-        "success" => false,
-        "message" => "Failed to add task"
-    ]);
+    sendResponse(true, "Task added successfully");
 }
+
+sendResponse(false, "Failed to add task");

@@ -19,13 +19,7 @@ mysqli_stmt_bind_param(
 );
 
 if(mysqli_stmt_execute($stmt)){
-    echo json_encode([
-        "success" => true,
-        "message" => "Task updated successfully"
-    ]);
-}else{
-    echo json_encode([
-        "success" => false,
-        "message" => "Failed to update task"
-    ]);
+    sendResponse(true, "Task updated successfully");
 }
+
+sendResponse(false, "Failed to update task");
