@@ -22,10 +22,10 @@ button{
 .add-button{
   color: white;
   padding: 15px 20px;
-  background-color: hsl(120, 100%, 35%);
+  background-color: hsl(120, 100%, 25%);
 }
 .add-button:hover{
-  background-color: hsl(120, 100%, 25%);
+  background-color: hsl(120, 100%, 20%);
 }
 .delete-button{
   background-color: hsl(0, 100%, 70%);
@@ -37,6 +37,24 @@ button{
   background-color: hsl(240, 100%, 70%);
 }
 .move-button:hover{
+  background-color: hsl(240, 100%, 60%);
+}
+.edit-button{
+  background-color: hsl(35, 100%, 55%);
+}
+.edit-button:hover{
+  background-color: hsl(35, 100%, 35%);
+}
+.save-button{
+  background-color: hsl(120, 100%, 35%);
+}
+.save-button:hover{
+  background-color: hsl(120, 100%, 20%);
+}
+.cancel-button{
+  background-color: hsl(240, 100%, 70%);
+}
+.cancel-button:hover{
   background-color: hsl(240, 100%, 60%);
 }
 input[type="text"]{
@@ -67,7 +85,7 @@ align-items: center;
   text-decoration: line-through;
   opacity: 0.6;
 }
-.delete-button, .move-button{
-  font-size: 1.3rem;
-  margin-left: 5px;
+.delete-button, .move-button, .edit-button, .save-button, .cancel-button{
+  font-size: 1.1rem;
+  margin-left: 2px;
 }
