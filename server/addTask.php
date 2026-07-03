@@ -5,8 +5,8 @@ $task = $_POST["task"];
 
 $stmt = mysqli_prepare(
     $conn,
-    "INSERT INTO tasks (task, completed)
-     VALUES (?, ?)"
+    "INSERT INTO tasks (task, completed, user_id)
+     VALUES (?, ?, 1)"
 );
 
 $completed = 0;
