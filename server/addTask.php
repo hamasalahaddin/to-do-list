@@ -1,21 +1,24 @@
 <?php
 require "config.php";
 
+$userId = requireLogin();
+
 $task = $_POST["task"];
 
 $stmt = mysqli_prepare(
     $conn,
     "INSERT INTO tasks (task, completed, user_id)
-     VALUES (?, ?, 1)"
+     VALUES (?, ?, ?)"
 );
 
 $completed = 0;
 
 mysqli_stmt_bind_param(
     $stmt,
-    "si",
+    "sii",
     $task,
-    $completed
+    $completed,
+    $userId
 );
 
 if(mysqli_stmt_execute($stmt)){

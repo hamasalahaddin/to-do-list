@@ -1,8 +1,23 @@
 <?php
 require "config.php";
 
-$sql = "SELECT * FROM tasks";
-$result = mysqli_query($conn, $sql);
+$userId = requireLogin();
+
+$stmt = mysqli_prepare(
+    $conn,
+    "SELECT * FROM tasks
+     WHERE user_id = ?"
+);
+
+mysqli_stmt_bind_param(
+    $stmt,
+    "i",
+    $userId
+);
+
+mysqli_stmt_execute($stmt);
+
+$result = mysqli_stmt_get_result($stmt);
 
 $tasks = [];
 

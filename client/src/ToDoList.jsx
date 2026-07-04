@@ -8,7 +8,11 @@ function ToDoList(){
     const [editedTask, setEditedTask] = useState("");
 
     async function loadTasks(){
-        const response = await fetch("http://localhost/to-do-list/server/getTasks.php");
+        const response = await fetch("http://localhost/to-do-list/server/getTasks.php",
+            {
+                credentials: "include"    
+            }
+        );
 
         const data = await response.json();
         console.log(data);
@@ -23,7 +27,7 @@ function ToDoList(){
     }
     async function addTask(){
         if(newTask.trim() === ""){
-            hreturn;
+            return;
         }
 
         const formData = new FormData();
@@ -32,7 +36,8 @@ function ToDoList(){
         const response = await fetch("http://localhost/to-do-list/server/addTask.php",
             {
                 method: "POST",
-                body: formData
+                body: formData,
+                credentials: "include"
             }
         );
 
@@ -50,7 +55,8 @@ function ToDoList(){
         const response = await fetch("http://localhost/to-do-list/server/deleteTask.php",
             {
                 method: "POST",
-                body: formData
+                body: formData,
+                credentials: "include"
             }
         );
 
@@ -67,7 +73,8 @@ function ToDoList(){
         const response = await fetch("http://localhost/to-do-list/server/toggleComplete.php",
             {
                 method: "POST",
-                body: formData
+                body: formData,
+                credentials: "include"
             }
         );
 
@@ -96,7 +103,8 @@ function ToDoList(){
         const response = await fetch("http://localhost/to-do-list/server/updateTask.php",
             {
                 method: "POST",
-                body: formData
+                body: formData,
+                credentials: "include"
             }
         );
 
@@ -129,9 +137,8 @@ function ToDoList(){
         <div className="to-do-list">
             <h1>To-Do List</h1>
             <div>
-                <input type="text" 
-                        placeholder="Enter a task..."
-                        value={newTask}
+                <input type="text" className="todo-input" 
+                        placeholder="Enter a task..." value={newTask}
                         onChange={handleInputChange}/>
                 <button className="add-button" onClick={addTask}>
                 Add Task
@@ -142,7 +149,7 @@ function ToDoList(){
                 <li key={task.id}>
                     {editingId === task.id ? (
                         <input
-                            type="text" value={editedTask}
+                            type="text" className="edit-input" value={editedTask}
                             onChange={(e) => setEditedTask(e.target.value)}
                         />
                     ) : (

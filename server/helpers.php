@@ -13,3 +13,9 @@ function sendResponse($success, $message, $data = null){
 
     exit();
 }
+function requireLogin(){
+    if(!isset($_SESSION["user_id"])){
+        sendResponse(false, "Please log in");
+    }
+    return $_SESSION["user_id"];
+}
