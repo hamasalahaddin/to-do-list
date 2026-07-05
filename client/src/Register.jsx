@@ -34,17 +34,17 @@ function Register(){
 
     return(
         <>
-            <h2>Register</h2>
-            <input type="text" placeholder="Username" value={username}
+            <h1>Register</h1>
+            <input className="register-input" type="text" placeholder="Username" value={username}
                    onChange={(e) => setUsername(e.target.value)}
             />
             <br />
-            <input type="password" placeholder="Password" value={password}
+            <input className="register-input" type="password" placeholder="Password" value={password}
                    onChange={(e) => setPassword(e.target.value)}
             />
             <br />
             <p>{message}</p>
-            <button onClick={registerUser}>Register</button>
+            <button className="register-button" onClick={registerUser}>Register</button>
         </>
     );
 }

@@ -1,5 +1,6 @@
 import {useState} from "react";
-function Login(){
+
+function Login({onLogin}){
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
@@ -29,22 +30,24 @@ function Login(){
         if(data.success){
             setUsername("");
             setPassword("");
+
+            onLogin(true);
         }
     }
 
     return(
         <>
-            <h2>Login</h2>
-            <input type="text" placeholder="Username" value={username}
+            <h1>Login</h1>
+            <input className="login-input" type="text" placeholder="Username" value={username}
                 onChange={(e) => setUsername(e.target.value)}
             />
             <br />
-            <input type="password" placeholder="Password" value={password}
+            <input className="login-input" type="password" placeholder="Password" value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
             <br />
             <p>{message}</p>
-            <button onClick={loginUser}>Login</button>
+            <button className="login-button" onClick={loginUser}>Login</button>
         </>
     );
 }

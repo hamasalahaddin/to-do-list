@@ -9,6 +9,7 @@ body{
 }
 h1{
   font-size: 3rem;
+  font-family: Arial, Helvetica, sans-serif;
 }
 button{
   font-size: 1.2rem;
@@ -19,19 +20,30 @@ button{
   cursor: pointer;
   transition: background-color 0.5s ease;
 }
-.add-button{
+.logout-button{
+    background-color: hsl(0, 100%, 65%);
+    color: white;
+    font-size: 0.7em;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+}
+.logout-button:hover{
+  background-color: hsl(0, 100%, 40%);
+}
+.add-button, .login-button, .register-button{
   color: white;
   padding: 15px 20px;
   background-color: hsl(120, 100%, 25%);
 }
-.add-button:hover{
+.add-button:hover, .login-button:hover, .register-button:hover{
   background-color: hsl(120, 100%, 20%);
 }
 .delete-button{
-  background-color: hsl(0, 100%, 70%);
+  background-color: hsl(0, 100%, 65%);
 }
 .delete-button:hover{
-  background-color: hsl(0, 100%, 60%);
+  background-color: hsl(0, 100%, 40%);
 }
 .move-button{
   background-color: hsl(240, 100%, 70%);
@@ -69,6 +81,12 @@ button{
   font-size: 1.5rem;
   padding: 10px;
   margin: 15px;
+  border-radius: 5px;
+}
+.register-input, .login-input{
+  font-size: 1.2rem;
+  padding: 5px;
+  margin: 2px;
   border-radius: 5px;
 }
 ol{

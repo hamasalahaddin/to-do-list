@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 
-function ToDoList(){
+function ToDoList({onLogout}){
 
     const [tasks, setTasks] = useState([]);
     const [newTask, setNewTask] = useState("");
@@ -132,10 +132,26 @@ function ToDoList(){
             setTasks(updatedTasks);
         }
     }
+    async function logoutUser(){
+        const response = await fetch("http://localhost/to-do-list/server/logout.php",
+            {
+                method: "POST",
+                credentials: "include"
+            }
+        );
+
+        const data = await response.json();
+        console.log(data);
+
+        if(data.success){
+            onLogout();
+        }
+    }
 
     return(
         <div className="to-do-list">
             <h1>To-Do List</h1>
+            <button className="logout-button" onClick={logoutUser}>Logout</button>
             <div>
                 <input type="text" className="todo-input" 
                         placeholder="Enter a task..." value={newTask}
@@ -178,4 +194,4 @@ function ToDoList(){
         </div>
     );
 }
-export default ToDoList
+export default ToDoList;
