@@ -6,6 +6,7 @@ import Login from "./Login";
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [showRegister, setShowRegister] = useState(false);
 
     useEffect(() => {
         checkSession();
@@ -35,7 +36,11 @@ function App() {
         isLoggedIn ? (
             <ToDoList onLogout={() => setIsLoggedIn(false)} />
         ) : (
-            <Login onLogin={setIsLoggedIn} />
+            showRegister ? (
+                <Register onShowLogin={() => setShowRegister(false)} />
+            ) : (
+                <Login onLogin={setIsLoggedIn} onShowRegister={() => setShowRegister(true)} />
+            )
         )
     );
 }

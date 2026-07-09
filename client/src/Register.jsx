@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-function Register(){
+function Register({onShowLogin}){
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
@@ -29,6 +29,8 @@ function Register(){
         if(data.success){
             setUsername("");
             setPassword("");
+
+            onShowLogin();
         }
     }
 
@@ -45,6 +47,8 @@ function Register(){
             <br />
             <p>{message}</p>
             <button className="register-button" onClick={registerUser}>Register</button>
+            <p>Already have an account?</p>
+            <button onClick={onShowLogin}>Login</button>
         </>
     );
 }
